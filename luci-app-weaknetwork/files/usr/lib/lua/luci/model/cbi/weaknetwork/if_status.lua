@@ -1,7 +1,7 @@
 require("luci.sys")
 require("luci.sys.zoneinfo")
 require("luci.tools.webadmin")
-require("luci.fs")
+require("nixio.fs")
 require("luci.config")
 
 for k, v in ipairs(luci.sys.net.devices()) do

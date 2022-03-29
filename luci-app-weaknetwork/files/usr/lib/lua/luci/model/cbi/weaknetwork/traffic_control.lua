@@ -1,8 +1,9 @@
 require("luci.sys")
 require("luci.sys.zoneinfo")
 require("luci.tools.webadmin")
-require("luci.fs")
 require("luci.config")
+
+require("nixio.fs")
 
 local m, s, o
 
@@ -266,10 +267,9 @@ o:value('100%', translate("100%"))
 -- o.default = '0%'
 
 
---[ local apply = luci.http.formvalue("cbi.apply")
---if apply then
---    io.popen("/etc/init.d/weaknetem restart")
---end
---]
+local apply = luci.http.formvalue("cbi.apply")
+if apply then
+    io.popen("/etc/init.d/weaknetem restart")
+end
 
 return m

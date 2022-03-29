@@ -52,7 +52,7 @@ run_netem()
                     fi
                 fi
                 $result
-                echo ${result/add/del} >> "netem.bak"
+                echo ${result/add/del} >> "/tmp/netem.bak"
             done
         fi
     fi
@@ -69,12 +69,12 @@ start()
 #        tc qdisc del dev $ifa root
 #    done
 # 先清理上次的配置
-    if [ -f /etc/init.d/netem.bak ]; then
+    if [ -f /tmp/netem.bak ]; then
         while read LINE
         do
             $LINE
-        done < "netem.bak"
-        rm "netem.bak"
+        done < "/tmp/netem.bak"
+        rm "/tmp/netem.bak"
     fi
 
     config_foreach run_netem controlboard
@@ -82,6 +82,14 @@ start()
 
 stop()
 {
+    if [ -f /tmp/netem.bak ]; then
+        while read LINE
+        do
+            $LINE
+        done < "/tmp/netem.bak"
+        rm "/tmp/netem.bak"
+    fi
+
     result=`pidof weaknetem`
     kill -9 $result
     echo "weaknetem has stoped"

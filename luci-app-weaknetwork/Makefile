@@ -13,6 +13,7 @@ define Package/luci-app-weaknetwork
     SUBMENU:=3. Applications
     TITLE:=weaknetwork config for LuCI
     PKGARCH:=all
+		DEPENDS:=+luci-compat +luci-lib-nixio +luci-lib-iptparser +tc +kmod-sched +iptables-mod-nat-extra +iptables-mod-ipopt
 endef
 
 define Package/luci-app-weaknetwork/description
